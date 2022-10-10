@@ -1,0 +1,1341 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+html,
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 164, 78, 1) 30%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+:root {
+  --horse-width: 3.8rem;
+  --horse-height: 2.5rem;
+  --color-horse: rgba(255, 255, 255, 1);
+  --color-horse-back: rgba(255, 255, 255, 1);
+  --color-hair: rgba(255, 255, 255, 1);
+  --tail: var(--color-hair);
+  --speed: 0.9s;
+  /* --color-horse: hsla(0,0%,0%,0.3);
+  --color-hair : var(--color-horse);
+  --color-horse-back: var(--color-horse); */
+}
+.sun {
+  height: 10vmin;
+  width: 10vmin;
+  position: absolute;
+  border-radius: 50%;
+  background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
+  top: 7%;
+  left: 7%;
+  animation: sun 120s linear infinite;
+}
+
+.floor {
+  position: fixed;
+  bottom: 0;
+  height: 40vh;
+  width: 100%;
+  background: linear-gradient(9deg, rgba(232, 217, 190, 1) 0%, #a95108 100%);
+}
+.horse {
+  height: 75vmin;
+  width: 75vmin;
+  position: relative;
+  background: transparent;
+  bottom: -7vh;
+  /* display: none; */
+}
+.horse > * {
+  position: absolute;
+  top: var(--part-y, 0);
+  left: var(--part-x, 0);
+  height: var(--part-height, 10px);
+  width: var(--part-width, 10px);
+  border-radius: var(--part-radius, 0);
+  transform: rotate(var(--part-rotate, 0deg));
+  transform-origin: var(--part-origin, 50% 50%);
+  animation-delay: var(--delay, 0s) !important;
+  z-index: 2;
+}
+.horse > * *,
+.horse > * *::before,
+.horse > * *::after {
+  position: absolute;
+  top: var(--shape-y, 0);
+  left: var(--shape-x, 0);
+  height: var(--shape-height, 10px);
+  width: var(--shape-width, 10px);
+  border-radius: var(--shape-radius, 0);
+  transform: rotate(var(--shape-rotate, 0deg));
+  transform-origin: var(--shape-origin, 50% 50%);
+  background: var(--color-horse);
+  animation-delay: var(--delay, 0s) !important;
+  border: 1px dashed white;
+  border: none;
+}
+
+/* --Head-- */
+.head {
+  --part-height: 10%;
+  --part-width: 20%;
+  --part-x: -5%;
+  --part-y: 3%;
+  --part-rotate: -41deg;
+  --part-origin: 100% 50%;
+}
+.skull {
+  --shape-width: 56%;
+  --shape-height: 82%;
+  --shape-radius: 50%;
+  --shape-x: 46%;
+  --shape-y: 10%;
+  --shape-rotate: 41deg;
+}
+.face {
+  --shape-height: 50%;
+  --shape-width: 50%;
+  --shape-x: 14%;
+  --shape-y: 14%;
+  --shape-rotate: -7deg;
+}
+.nose {
+  --shape-height: 45%;
+  --shape-width: 30%;
+  --shape-radius: 50%;
+  --shape-x: 2%;
+  --shape-y: 14%;
+  --shape-rotate: -12deg;
+}
+.lips {
+  --shape-height: 28%;
+  --shape-width: 15%;
+  --shape-radius: 30%;
+  --shape-x: -4%;
+  --shape-y: 38%;
+  --shape-rotate: 45deg;
+}
+.chin {
+  --shape-height: 45%;
+  --shape-width: 18%;
+  --shape-radius: 25%;
+  --shape-x: 4%;
+  --shape-y: 39%;
+  --shape-rotate: 32deg;
+}
+.chin::after {
+  content: "";
+  --shape-height: 97%;
+  --shape-width: 257%;
+  --shape-radius: ;
+  --shape-rotate: -17deg;
+  --shape-x: 60%;
+  --shape-y: -47%;
+}
+.jaw {
+  --shape-height: 60%;
+  --shape-width: 35%;
+  --shape-radius: 50%;
+  --shape-rotate: -56deg;
+  --shape-x: 38%;
+  --shape-y: 37%;
+}
+.eye {
+  --shape-height: 14%;
+  --shape-width: 8%;
+  --shape-radius: 70% 0% 70% 0%;
+  --shape-rotate: -132deg;
+  --shape-x: 46.5%;
+  --shape-y: 20%;
+  background: hsla(0, 2%, 74%, 0.92);
+}
+.ear {
+  --shape-height: 55%;
+  --shape-width: 13%;
+  --shape-radius: 50%;
+  --shape-rotate: 100deg;
+  --shape-x: 86%;
+  --shape-y: 2%;
+  --shape-origin: 50% 100%;
+}
+
+/* --Neck-- */
+.neck {
+  --part-height: 17%;
+  --part-width: 36%;
+  --part-x: -1%;
+  --part-rotate: 44deg;
+  --part-y: 25%;
+  --part-origin: 90% 50%;
+}
+
+.neck .under {
+  --shape-height: 44%;
+  --shape-width: 21%;
+  --shape-radius: 50%;
+  --shape-rotate: -45deg;
+  --shape-x: 9%;
+  --shape-y: 55%;
+  background: transparent;
+  border-top: 2vmin solid var(--color-horse);
+}
+.neck .front {
+  --shape-height: 52%;
+  --shape-width: 78%;
+  --shape-radius: 50%;
+  --shape-rotate: 18deg;
+  --shape-x: 9%;
+  --shape-y: 38%;
+}
+.neck .top {
+  --shape-height: 23%;
+  --shape-width: 50%;
+  --shape-radius: 25%;
+  --shape-rotate: 0deg;
+  --shape-x: 10%;
+  --shape-y: 21%;
+}
+.neck .top::before {
+  content: "";
+  --shape-height: 56%;
+  --shape-width: 76%;
+  --shape-radius: 0%;
+  --shape-rotate: -4deg;
+  --shape-x: 53%;
+  --shape-y: -8%;
+}
+.neck .hump {
+  --shape-height: 22%;
+  --shape-width: 45%;
+  --shape-radius: 50%;
+  --shape-rotate: -18deg;
+  --shape-x: 48%;
+  --shape-y: 19%;
+}
+
+/* Body */
+
+.body {
+  --part-height: 23%;
+  --part-width: 54%;
+  --part-x: 17%;
+  --part-y: 21.5%;
+  --part-origin: 10% 50%;
+  z-index: 10;
+}
+
+.body .section {
+  --shape-height: 90%;
+  --shape-width: 90%;
+  --shape-radius: 45% 0% 19% 19%;
+  --shape-origin: 10% 30%;
+  --shape-x: 45%;
+  --shape-y: 3%;
+  --shape-rotate: -6deg;
+}
+.body .section-first {
+  --shape-height: 92%;
+  --shape-width: 34%;
+  --shape-radius: 40%;
+  --shape-origin: 50% 50%;
+  --shape-rotate: 5deg;
+  --shape-x: 3%;
+  --shape-y: 6%;
+}
+.body .section-first::before {
+  content: "";
+  --shape-height: 70%;
+  --shape-width: 190%;
+  --shape-radius: 50%;
+  --shape-rotate: -21deg;
+  --shape-x: 27%;
+  --shape-y: 20%;
+}
+.body .section .last {
+  --shape-radius: 40%;
+}
+.back-section {
+  --shape-height: 78%;
+  --shape-width: 44%;
+  --shape-radius: 50%;
+  --shape-x: 59%;
+  --space-origin: 0 0;
+  --shape-y: -4%;
+  --shape-rotate: 14deg;
+}
+
+/* Front leg Right */
+
+.front-leg {
+  --part-width: 20%;
+  --part-height: 44%;
+  --part-x: 16%;
+  --part-y: 25%;
+  --part-origin: 100% 50%;
+}
+.right {
+  z-index: 1;
+  --color-horse: var(--color-horse-back);
+  --delay: 0.1s;
+}
+.front-leg .shoulder {
+  --shape-height: 34%;
+  --shape-width: 70%;
+  --shape-radius: 30% 30% 30% 50%;
+  --shape-rotate: ;
+  --shape-x: 17%;
+  --shape-y: 4%;
+  --shape-origin: 100% 50%;
+}
+.front-leg .upper {
+  --shape-height: 85%;
+  --shape-width: 45%;
+  --shape-radius: 30% 30% 50% 50%;
+  --shape-rotate: ;
+  --shape-x: 40%;
+  --shape-y: 57%;
+  --shape-origin: 40% 10%;
+}
+.front-leg .upper::before {
+  content: "";
+  --shape-height: 100%;
+  --shape-width: 45%;
+  --shape-radius: 20%;
+  --shape-rotate: -2deg;
+  --shape-x: 9%;
+  --shape-y: 55%;
+}
+.front-leg .upper::after {
+  content: "";
+  --shape-height: 100%;
+  --shape-width: 45%;
+  --shape-radius: 35%;
+  --shape-rotate: 7deg;
+  --shape-x: 38%;
+  --shape-y: 56%;
+}
+.front-leg .knee {
+  --shape-height: 70%;
+  --shape-width: 67%;
+  --shape-radius: 50%;
+  --shape-rotate: -1deg;
+  --shape-x: 0%;
+  --shape-y: 120%;
+  --shape-origin: 40% 20%;
+}
+.front-leg .knee::before {
+  content: "";
+  --shape-height: 50%;
+  --shape-width: 40%;
+  --shape-radius: 30%;
+  --shape-rotate: -2deg;
+  --shape-x: 4%;
+  --shape-y: 53%;
+}
+.front-leg .lower {
+  --shape-height: 105%;
+  --shape-width: 56%;
+  --shape-radius: ;
+  --shape-rotate: 10deg;
+  --shape-x: 14%;
+  --shape-y: 82%;
+}
+.front-leg .ankle {
+  --shape-height: 57%;
+  --shape-width: 135%;
+  --shape-radius: 50%;
+  --shape-rotate: 23deg;
+  --shape-x: -7%;
+  --shape-y: 77%;
+}
+.front-leg .foot {
+  --shape-width: 120%;
+  --shape-height: 151%;
+  --shape-radius: 0%;
+  --shape-rotate: 30deg;
+  --shape-x: -11%;
+  --shape-y: 59%;
+  /* clip-path: polygon(0% 0%, 90% 0%,65% 20%,72% 50%,20% 90%,10% 90%,0% 50%,10% 18%) */
+  clip-path: polygon(
+    0% 0%,
+    80% 0%,
+    65% 20%,
+    63% 30%,
+    70% 45%,
+    75% 55%,
+    46% 90%,
+    35% 95%,
+    10% 70%,
+    5% 50%,
+    10% 25%
+  );
+}
+.front-leg .shoe {
+  --shape-width: 100%;
+  --shape-height: 50%;
+  --shape-rotate: 55deg;
+  --shape-x: 7%;
+  --shape-y: 52%;
+  background: black;
+}
+
+/* Back leg right */
+.back-leg {
+  --part-height: 37%;
+  --part-width: 27%;
+  --part-rotate: ;
+  --part-x: 55%;
+  --part-y: 19.5%;
+  --part-origin: 100% 50%;
+}
+.back-leg .top {
+  --shape-height: 27%;
+  --shape-width: 61%;
+  --shape-radius: 47%;
+  --shape-rotate: 24deg;
+  --shape-x: 0%;
+  --shape-y: 6%;
+  background: transparent;
+}
+.back-leg .top::before {
+  content: "";
+  --shape-height: 174%;
+  --shape-width: 92%;
+  --shape-radius: 46%;
+  --shape-rotate: -43deg;
+  --shape-x: -3%;
+  --shape-y: 57%;
+}
+.back-leg .top::after {
+  content: "";
+  --shape-height: 78%;
+  --shape-width: 113%;
+  --shape-radius: 40%/90%;
+  --shape-rotate: 94deg;
+  --shape-x: 37%;
+  --shape-y: 97%;
+  --shape-origin: 50% 10%;
+}
+.back-leg .thigh {
+  --shape-height: 151%;
+  --shape-width: 33%;
+  --shape-radius: 105%/ 40%;
+  --shape-rotate: -106deg;
+  --shape-x: 42%;
+  --shape-y: 197%;
+  --shape-origin: 50% 0%;
+}
+.back-leg .thigh::after {
+  content: "";
+  --shape-height: 71%;
+  --shape-width: 68%;
+  --shape-radius: 50%;
+  --shape-rotate: 5deg;
+  --shape-x: 0%;
+  --shape-y: -31%;
+  --shape-origin: 50% 50%;
+}
+
+.back-leg .lower {
+  --shape-height: 100%;
+  --shape-width: 50%;
+  --shape-radius: 75%/18%;
+  --shape-rotate: 50deg;
+  --shape-x: 66%;
+  --shape-y: 88%;
+  --shape-origin: 50% 0%;
+}
+
+.back-leg .foot {
+  --shape-x: -108%;
+  --shape-y: 101%;
+  --shape-width: 182%;
+  --shape-height: 65%;
+  --shape-radius: 0%;
+  --shape-rotate: -70deg;
+
+  clip-path: polygon(
+    90% 0%,
+    95% 10%,
+    100% 20%,
+    100% 30%,
+    60% 45%,
+    60% 55%,
+    70% 62%,
+    80% 65%,
+    80% 70%,
+    15% 95%,
+    10% 50%,
+    15% 25%,
+    30% 10%,
+    70% 0%
+  );
+}
+
+.back-leg .shoe {
+  --shape-x: -10%;
+  --shape-y: 56%;
+  --shape-width: 100%;
+  --shape-height: 100%;
+  --shape-radius: 0%;
+  --shape-rotate: -5deg;
+  background: black;
+}
+
+/* ---Tail--- */
+.tail {
+  --part-width: 43%;
+  --part-height: 16%;
+  --part-x: 60%;
+  --part-y: 20%;
+  --part-rotate: 12deg;
+  --part-origin: 0% 50%;
+  z-index: 5;
+}
+.tail div {
+  background: var(--tail);
+}
+.tail .tail-first {
+  --shape-height: 27%;
+  --shape-width: 35%;
+  --shape-radius: 40%/120%;
+  --shape-rotate: 5deg;
+  --shape-x: 1%;
+  --shape-y: 7%;
+}
+/* the first section */
+.tail > .tail-first > .section {
+  --shape-height: 191%;
+  --shape-width: 53%;
+}
+.tail .section {
+  --shape-width: 100%;
+  --shape-height: 90%;
+  --shape-rotate: 15deg;
+  --shape-origin: 0% 50%;
+  --shape-radius: 30% / 50%;
+  --shape-y: -10%;
+  --shape-x: 60%;
+}
+.tail .section > * > * {
+  --shape-height: 80%;
+  --shape-rotate: 0deg;
+}
+
+.tail .section > * > * > * > * {
+  --shape-rotate: -20deg;
+  --shape-height: 44%;
+}
+.tail .section::before {
+  content: "";
+  --shape-height: 111%;
+  --shape-width: 138%;
+  --shape-radius: 50%;
+  --shape-rotate: -4deg;
+  --shape-x: ;
+  --shape-y: 12%;
+  box-shadow: -1.5vmin 1vmin 0 0 var(--tail);
+  background: transparent;
+}
+.tail .section::after {
+  content: "";
+  --shape-height: 115%;
+  --shape-width: 79%;
+  --shape-radius: 50%;
+  --shape-rotate: -15deg;
+  --shape-x: 71%;
+  --shape-y: -6%;
+  box-shadow: -1.5vmin 1vmin 0 0 var(--tail);
+  background: transparent;
+}
+.extra {
+  --shape-height: ;
+  --shape-width: ;
+  --shape-radius: ;
+  --shape-rotate: ;
+  --shape-x: ;
+  --shape-y: ;
+}
+
+.hair {
+  --shape-width: 36%;
+  --shape-height: 18%;
+  --shape-x: 12%;
+  --shape-y: 21%;
+  --shape-rotate: 2deg;
+  --shape-origin: 0% 50%;
+  background: transparent;
+  z-index: -1;
+}
+.hair .section {
+  --shape-height: 90%;
+  --shape-width: 99%;
+  --shape-radius: 50%;
+  --shape-rotate: -3.5deg;
+  --shape-x: 17%;
+  --shape-y: 23%;
+  -webkit-box-shadow: 15vmin 0vmin 0 0 var(--color-hair);
+  box-shadow: 0vmin -1vmin 0 0 var(--color-hair);
+  background: transparent;
+}
+.hair > .section {
+  --shape-height: 187%;
+  --shape-width: 104%;
+  --shape-radius: 50%;
+  --shape-rotate: -13deg;
+  --shape-x: 15%;
+  --shape-y: 59%;
+}
+.hair .section::before {
+  content: "";
+  --shape-height: 134%;
+  --shape-width: 26%;
+  --shape-radius: 50%;
+  --shape-rotate: 67deg;
+  --shape-x: 34%;
+  --shape-y: -109%;
+  box-shadow: -0.5vmin -0.5vmin 0 0 var(--color-hair);
+  background: transparent;
+}
+.hair .section::after {
+  content: "";
+  --shape-height: 136%;
+  --shape-width: 28%;
+  --shape-radius: 50%;
+  --shape-rotate: -278deg;
+  --shape-x: 39%;
+  --shape-y: -97%;
+  -webkit-box-shadow: -1vmin 0vmin 0 0 var(--color-hair);
+  box-shadow: -1vmin 0vmin 0 0 var(--color-hair);
+  background: transparent;
+}
+
+/* Animations */
+@keyframes body {
+  0%,
+  100% {
+    transform: rotate(8deg) translateX(2%) translateY(-5%);
+  }
+  9% {
+    transform: rotate(4deg) translateX(2%) translateY(0%);
+  }
+  18.1% {
+    transform: rotate(1deg) translateX(0%) translateY(5%);
+  }
+  27.2% {
+    transform: rotate(1deg) translateX(2%) translateY(0%) scaleX(0.92);
+  }
+  36.3% {
+    transform: rotate(0deg) translateX(2%) translateY(-2%) scaleX(0.9);
+  }
+  45.4% {
+    transform: rotate(2deg) translateX(2%) translateY(-3%) scaleX(0.9);
+  }
+  54.5% {
+    transform: rotate(3deg) translateX(2%) translateY(-5%) scaleX(0.9);
+  }
+  63.6% {
+    transform: rotate(4deg) translateX(0%) translateY(-4%) scaleX(0.9);
+  }
+  72.7% {
+    transform: rotate(4.5deg) translateX(0%) translateY(-3%) scaleX(0.95);
+  }
+  81.8% {
+    transform: rotate(6.5deg) translateX(0%) translateY(-5%) scaleX(0.95);
+  }
+  90.9% {
+    transform: rotate(10deg) translateX(0%) translateY(-14%) scaleX(1);
+  }
+}
+.animate .body {
+  animation: body var(--speed) infinite linear;
+}
+@keyframes front-shoulder {
+  0%,
+  100% {
+    transform: rotate(20deg) translateX(0%) translateY(6%);
+  }
+  8.3% {
+    transform: rotate(8deg) translateX(-10%) translateY(0%);
+  }
+  16.6% {
+    transform: rotate(0deg) translateX(-12%) translateY(-3%);
+  }
+  24.9% {
+    transform: rotate(0deg) translateX(10%) translateY(0%);
+  }
+  33.3% {
+    transform: rotate(-30deg) translateX(7%) translateY(-12%);
+  }
+  41.6% {
+    transform: rotate(-30deg) translateX(11%) translateY(-10%);
+  }
+  49.9% {
+    transform: rotate(-20deg) translateX(10%) translateY(0%);
+  }
+  58.3% {
+    transform: rotate(-10deg) translateX(30%) translateY(-5%);
+  }
+  66.6% {
+    transform: rotate(15deg) translateX(25%) translateY(5%);
+  }
+  74.9% {
+    transform: rotate(0deg) translateX(0%) translateY(0%);
+  }
+  83.3% {
+    transform: rotate(0deg) translateX(0%) translateY(0%);
+  }
+  91.6% {
+    transform: rotate(20deg) translateX(0%) translateY(0%);
+  }
+}
+
+.animate .front-leg .shoulder {
+  animation: front-shoulder var(--speed) infinite linear;
+}
+
+@keyframes front-upper {
+  0%,
+  100% {
+    transform: rotate(50deg) translateX(30%) translateY(8%);
+  }
+  8.3% {
+    transform: rotate(45deg) translateX(40%) translateY(10%);
+  }
+  16.6% {
+    transform: rotate(33deg) translateX(25%) translateY(10%);
+  }
+  24.9% {
+    transform: rotate(0deg) translateX(0%) translateY(0%);
+  }
+  33.3% {
+    transform: rotate(18deg) translateX(7%) translateY(10%);
+  }
+  41.6% {
+    transform: rotate(-8deg) translateX(-30%) translateY(15%);
+  }
+  49.9% {
+    transform: rotate(-4deg) translateX(-20%) translateY(10%);
+  }
+  58.3% {
+    transform: rotate(20deg) translateX(17%) translateY(10%);
+  }
+  66.6% {
+    transform: rotate(30deg) translateX(20%) translateY(-10%);
+  }
+  74.9% {
+    transform: rotate(75deg) translateX(40%) translateY(-15%);
+  }
+  83.3% {
+    transform: rotate(85deg) translateX(15%) translateY(-10%);
+  }
+  91.6% {
+    transform: rotate(55deg) translateX(25%) translateY(-5%);
+  }
+}
+.animate .front-leg .upper {
+  animation: front-upper var(--speed) linear infinite;
+}
+
+@keyframes front-knee {
+  0%,
+  100% {
+    transform: rotate(-15deg) translateX(0%) translateY(0%);
+  }
+  8.3% {
+    transform: rotate(-10deg) translateX(0%) translateY(0%);
+  }
+  16.6% {
+    transform: rotate(-12deg) translateX(0%) translateY(0%);
+  }
+  24.9% {
+    transform: rotate(-20deg) translateX(0%) translateY(0%);
+  }
+  33.3% {
+    transform: rotate(-55deg) translateX(-25%) translateY(10%);
+  }
+  41.6% {
+    transform: rotate(-35deg) translateX(0%) translateY(-10%);
+  }
+  49.9% {
+    transform: rotate(-28deg) translateX(0%) translateY(0%);
+  }
+  58.3% {
+    transform: rotate(-90deg) translateX(-22%) translateY(0%);
+  }
+  66.6% {
+    transform: rotate(-95deg) translateX(-30%) translateY(0%);
+  }
+  74.9% {
+    transform: rotate(-98deg) translateX(-10%) translateY(0%);
+  }
+  83.3% {
+    transform: rotate(-80deg) translateX(-20%) translateY(8%);
+  }
+  91.6% {
+    transform: rotate(-50deg) translateX(-30%) translateY(10%);
+  }
+}
+
+.animate .front-leg .knee {
+  animation: front-knee var(--speed) linear infinite;
+}
+
+@keyframes front-lower {
+  0%,
+  100% {
+    transform: rotate(-25deg) translateX(20%) translateY(0%);
+  }
+  8.3% {
+    transform: rotate(10deg) translateX(0%) translateY(-10%);
+  }
+  16.6% {
+    transform: rotate(10deg) translateX(0%) translateY(0%);
+  }
+  24.9% {
+    transform: rotate(12deg) translateX(0%) translateY(0%);
+  }
+  33.3% {
+    transform: rotate(-12deg) translateX(7%) translateY(-12%);
+  }
+  41.6% {
+    transform: rotate(0deg) translateX(0%) translateY(-10%);
+  }
+  49.9% {
+    transform: rotate(-23deg) translateX(20%) translateY(-20%);
+  }
+  58.3% {
+    transform: rotate(0deg) translateX(0%) translateY(-30%);
+  }
+  66.6% {
+    transform: rotate(-15deg) translateX(30%) translateY(-20%);
+  }
+  74.9% {
+    transform: rotate(-15deg) translateX(0%) translateY(0%);
+  }
+  83.3% {
+    transform: rotate(-15deg) translateX(15%) translateY(0%);
+  }
+  91.6% {
+    transform: rotate(-10deg) translateX(20%) translateY(-30%);
+  }
+}
+
+.animate .front-leg .lower {
+  animation: front-lower var(--speed) linear infinite;
+}
+
+@keyframes front-ankle {
+  0%,
+  100% {
+    transform: rotate(20deg) translateX(0%) translateY(0%);
+  }
+  8.3% {
+    transform: rotate(20deg) translateX(0%) translateY(0%);
+  }
+  16.6% {
+    transform: rotate(20deg) translateX(0%) translateY(0%);
+  }
+  24.9% {
+    transform: rotate(20deg) translateX(0%) translateY(0%);
+  }
+  33.3% {
+    transform: rotate(15deg) translateX(10%) translateY(0%);
+  }
+  41.6% {
+    transform: rotate(20deg) translateX(0%) translateY(0%);
+  }
+  49.9% {
+    transform: rotate(0deg) translateX(0%) translateY(0%);
+  }
+  58.3% {
+    transform: rotate(0deg) translateX(0%) translateY(-20%);
+  }
+  66.6% {
+    transform: rotate(-30deg) translateX(0%) translateY(0%);
+  }
+  74.9% {
+    transform: rotate(-30deg) translateX(0%) translateY(0%);
+  }
+  83.3% {
+    transform: rotate(-10deg) translateX(0%) translateY(-20%);
+  }
+  91.6% {
+    transform: rotate(20deg) translateX(0%) translateY(0%);
+  }
+}
+
+.animate .front-leg .ankle {
+  animation: front-ankle var(--speed) linear infinite;
+}
+
+@keyframes front-foot {
+  0%,
+  100% {
+    transform: rotate(-28deg) translateX(40%) translateY(0%);
+  }
+  8.3% {
+    transform: rotate(-15deg) translateX(50%) translateY(0%);
+  }
+  16.6% {
+    transform: rotate(-11deg) translateX(35%) translateY(0%);
+  }
+  24.9% {
+    transform: rotate(50deg) translateX(0%) translateY(0%);
+  }
+  33.3% {
+    transform: rotate(-10deg) translateX(50%) translateY(0%);
+  }
+  41.6% {
+    transform: rotate(-36deg) translateX(50%) translateY(0%);
+  }
+  49.9% {
+    transform: rotate(-30deg) translateX(32%) translateY(0%);
+  }
+  58.3% {
+    transform: rotate(-30deg) translateX(45%) translateY(0%);
+  }
+  66.6% {
+    transform: rotate(-30deg) translateX(50%) translateY(0%);
+  }
+  74.9% {
+    transform: rotate(-30deg) translateX(50%) translateY(0%);
+  }
+  83.3% {
+    transform: rotate(-30deg) translateX(50%) translateY(0%);
+  }
+  91.6% {
+    transform: rotate(-50deg) translateX(50%) translateY(10%);
+  }
+}
+
+.animate .front-leg .foot {
+  animation: front-foot var(--speed) linear infinite;
+}
+
+@keyframes back-top {
+  0%,
+  100% {
+    transform: rotate(0deg) translateX(-5%) translateY(50%);
+  }
+  8.3% {
+    transform: rotate(-5deg) translateX(-7%) translateY(38%);
+  }
+  16.6% {
+    transform: rotate(-10deg) translateX(-14%) translateY(30%);
+  }
+  24.9% {
+    transform: rotate(25deg) translateX(0%) translateY(10%);
+  }
+  33.3% {
+    transform: rotate(32deg) translateX(-18%) translateY(25%);
+  }
+  41.6% {
+    transform: rotate(45deg) translateX(-5%) translateY(20%);
+  }
+  49.9% {
+    transform: rotate(55deg) translateX(10%) translateY(35%);
+  }
+  58.3% {
+    transform: rotate(55deg) translateX(10%) translateY(40%);
+  }
+  66.6% {
+    transform: rotate(65deg) translateX(20%) translateY(40%);
+  }
+  74.9% {
+    transform: rotate(65deg) translateX(20%) translateY(45%);
+  }
+  83.3% {
+    transform: rotate(55deg) translateX(25%) translateY(40%);
+  }
+  91.6% {
+    transform: rotate(30deg) translateX(10%) translateY(40%);
+  }
+}
+
+.animate .back-leg .top {
+  animation: back-top var(--speed) linear infinite;
+}
+
+@keyframes back-thigh {
+  0%,
+  100% {
+    transform: rotate(-45deg) translateX(-30%) translateY(-10%);
+  }
+  8.3% {
+    transform: rotate(-45deg) translateX(-30%) translateY(-8%);
+  }
+  16.6% {
+    transform: rotate(-43deg) translateX(-35%) translateY(-10%);
+  }
+  24.9% {
+    transform: rotate(-95deg) translateX(0%) translateY(0%);
+  }
+  33.3% {
+    transform: rotate(-115deg) translateX(0%) translateY(10%);
+  }
+  41.6% {
+    transform: rotate(-130deg) translateX(20%) translateY(-5%);
+  }
+  49.9% {
+    transform: rotate(-130deg) translateX(10%) translateY(0%);
+  }
+  58.3% {
+    transform: rotate(-90deg) translateX(80%) translateY(-20%);
+  }
+  66.6% {
+    transform: rotate(-85deg) translateX(0%) translateY(-20%);
+  }
+  74.9% {
+    transform: rotate(-65deg) translateX(5%) translateY(-10%);
+  }
+  83.3% {
+    transform: rotate(-65deg) translateX(10%) translateY(-10%);
+  }
+  91.6% {
+    transform: rotate(-75deg) translateX(-20%) translateY(-15%);
+  }
+}
+
+.animate .back-leg .thigh {
+  animation: back-thigh var(--speed) linear infinite;
+}
+
+@keyframes back-lower {
+  0%,
+  100% {
+    transform: rotate(40deg) translateX(0%) translateY(0%);
+  }
+  8.3% {
+    transform: rotate(30deg) translateX(-30%) translateY(0%);
+  }
+  16.6% {
+    transform: rotate(28deg) translateX(-40%) translateY(0%);
+  }
+  24.9% {
+    transform: rotate(47deg) translateX(0%) translateY(0%);
+  }
+  33.3% {
+    transform: rotate(78deg) translateX(0%) translateY(5%);
+  }
+  41.6% {
+    transform: rotate(110deg) translateX(40%) translateY(10%);
+  }
+  49.9% {
+    transform: rotate(115deg) translateX(50%) translateY(5%);
+  }
+  58.3% {
+    transform: rotate(90deg) translateX(30%) translateY(5%);
+  }
+  66.6% {
+    transform: rotate(76deg) translateX(0%) translateY(0%);
+  }
+  74.9% {
+    transform: rotate(50deg) translateX(-40%) translateY(-4%);
+  }
+  83.3% {
+    transform: rotate(40deg) translateX(-20%) translateY(-5%);
+  }
+  91.6% {
+    transform: rotate(70deg) translateX(0%) translateY(0%);
+  }
+}
+
+.animate .back-leg .lower {
+  animation: back-lower var(--speed) linear infinite;
+}
+
+@keyframes back-foot {
+  0%,
+  100% {
+    transform: rotate(40deg) translateX(0%) translateY(-20%);
+  }
+  8.3% {
+    transform: rotate(20deg) translateX(10%) translateY(-20%);
+  }
+  16.6% {
+    transform: rotate(-65deg) translateX(0%) translateY(0%);
+  }
+  24.9% {
+    transform: rotate(-70deg) translateX(0%) translateY(0%);
+  }
+  33.3% {
+    transform: rotate(-60deg) translateX(20%) translateY(-10%);
+  }
+  41.6% {
+    transform: rotate(-80deg) translateX(0%) translateY(0%);
+  }
+  49.9% {
+    transform: rotate(-70deg) translateX(0%) translateY(0%);
+  }
+  58.3% {
+    transform: rotate(-60deg) translateX(10%) translateY(-10%);
+  }
+  66.6% {
+    transform: rotate(-43deg) translateX(20%) translateY(-10%);
+  }
+  74.9% {
+    transform: rotate(-13deg) translateX(5%) translateY(-10%);
+  }
+  83.3% {
+    transform: rotate(8deg) translateX(5%) translateY(-15%);
+  }
+  91.6% {
+    transform: rotate(20deg) translateX(15%) translateY(-20%);
+  }
+}
+
+.animate .back-leg .foot {
+  animation: back-foot var(--speed) linear infinite;
+}
+
+@keyframes neck {
+  0%,
+  100% {
+    transform: scaleX(1) rotate(40deg) translateX(0%) translateY(-10%);
+  }
+  16.6% {
+    transform: scaleX(1) rotate(40deg) translateX(6%) translateY(-10%);
+  }
+  33.3% {
+    transform: scaleX(0.9) rotate(45deg) translateX(3%) translateY(5%);
+  }
+  49.9% {
+    transform: scaleX(0.85) rotate(45deg) translateX(3%) translateY(-5%);
+  }
+  66.6% {
+    transform: scaleX(0.85) rotate(40deg) translateX(0%) translateY(-15%);
+  }
+  83.3% {
+    transform: scaleX(1) rotate(35deg) translateX(0%) translateY(-15%);
+  }
+}
+.animate .neck {
+  animation: neck var(--speed) linear infinite;
+}
+
+@keyframes head {
+  0%,
+  100% {
+    transform: rotate(-45deg) translateX(-5%) translateY(10%);
+  }
+  16.6% {
+    transform: rotate(-45deg) translateX(0%) translateY(15%);
+  }
+  33.3% {
+    transform: rotate(-40deg) translateX(5%) translateY(23%);
+  }
+  49.9% {
+    transform: rotate(-36deg) translateX(15%) translateY(35%);
+  }
+  66.6% {
+    transform: rotate(-42deg) translateX(5%) translateY(35%);
+  }
+  83.3% {
+    transform: rotate(-45deg) translateX(-15%) translateY(10%);
+  }
+}
+.animate .head {
+  animation: head var(--speed) linear infinite;
+}
+
+@keyframes ear {
+  0%,
+  100% {
+    transform: rotate(100deg);
+  }
+  16.6% {
+    transform: rotate(110deg);
+  }
+  33.3% {
+    transform: rotate(105deg);
+  }
+  49.9% {
+    transform: rotate(115deg);
+  }
+  66.6% {
+    transform: rotate(120deg);
+  }
+  83.3% {
+    transform: rotate(100deg);
+  }
+}
+.animate .ear {
+  animation: ear var(--speed) linear infinite;
+}
+
+@keyframes tail {
+  0%,
+  100% {
+    transform: rotate(-10deg) translateX(-5%) translateY(38%);
+  }
+  16.6% {
+    transform: rotate(-10deg) translateX(-5%) translateY(28%);
+  }
+  33.3% {
+    transform: rotate(-10deg) translateX(-10%) translateY(10%);
+  }
+  49.9% {
+    transform: rotate(-10deg) translateX(-10%) translateY(10%);
+  }
+  66.6% {
+    transform: rotate(-10deg) translateX(-10%) translateY(18%);
+  }
+  83.3% {
+    transform: rotate(-10deg) translateX(-10%) translateY(25%);
+  }
+}
+
+.animate .tail {
+  animation: tail var(--speed) linear infinite;
+}
+
+@keyframes tail-section-1 {
+  0%,
+  100% {
+    transform: rotate(15deg);
+  }
+  16.6% {
+    transform: rotate(15deg);
+  }
+  33.3% {
+    transform: rotate(12deg);
+  }
+  49.9% {
+    transform: rotate(5deg);
+  }
+  66.6% {
+    transform: rotate(0deg);
+  }
+  83.3% {
+    transform: rotate(5deg);
+  }
+  /* 100% { transform: rotate(15deg); } */
+}
+
+.animate .tail .section {
+  animation: tail-section-1 var(--speed) linear infinite;
+}
+
+@keyframes tail-section-2 {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  16.6% {
+    transform: rotate(4deg);
+  }
+  33.3% {
+    transform: rotate(15deg);
+  }
+  49.9% {
+    transform: rotate(30deg);
+  }
+  66.6% {
+    transform: rotate(10deg);
+  }
+  83.3% {
+    transform: rotate(-5deg);
+  }
+  /* 100% { transform: rotate(0deg); } */
+}
+
+.animate .tail .section > * > * {
+  animation: tail-section-2 var(--speed) linear infinite;
+}
+
+@keyframes tail-section-3 {
+  0%,
+  100% {
+    transform: rotate(-25deg);
+  }
+  16.6% {
+    transform: rotate(-20deg);
+  }
+  33.3% {
+    transform: rotate(-20deg);
+  }
+  49.9% {
+    transform: rotate(-40deg);
+  }
+  66.6% {
+    transform: rotate(0deg);
+  }
+  83.3% {
+    transform: rotate(10deg);
+  }
+  /* 100% { transform: rotate(-25deg); } */
+}
+
+.animate .tail .section > * > * > * > * {
+  animation: tail-section-3 var(--speed) linear infinite;
+}
+@keyframes sun {
+  0% {
+    top: 12%;
+    left: 0%;
+  }
+  50% {
+    top: 3%;
+    left: 50%;
+  }
+  100% {
+    top: 12%;
+    left: 100%;
+  }
+}
+
+//--Dust Particles--
+.dust {
+  position: fixed;
+  height: 100%;
+  left: 0;
+  right: 0;
+  bottom: 25%;
+  overflow: hidden;
+}
+.dust .particle {
+  background-color: #af540b;
+  width: 0.1rem;
+  height: 0.1rem;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0%;
+  left: 30%;
+}
+.dust.back .particle {
+  left: 60%;
+}
+
+@for $i from 1 through 30 {
+  @keyframes particle-animation-#{$i} {
+    100% {
+      transform: translateX(calc(#{random() / 1.3} * 10rem))
+        translateY(calc(-#{random() / 100} * 5rem)) scale(random(50) + 2)
+        rotate(random(360) * -0.5deg);
+      opacity: 0;
+    }
+  }
+
+  .particle:nth-child(#{$i}) {
+    transform-origin: random(1) * -20% random(1) * -20%;
+    animation: particle-animation-#{$i} var(--speed) ease-out infinite;
+    animation-delay: calc((var(--speed) * 0.1) + #{$i * 0.01s});
+  }
+
+  .dust.back .particle:nth-child(#{$i}) {
+    animation-delay: calc((var(--speed) * 0.68) + #{$i * 0.01s});
+  }
+}
